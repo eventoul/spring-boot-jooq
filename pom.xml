@@ -88,6 +88,52 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.jooq</groupId>
+                <artifactId>jooq-codegen-maven</artifactId>
+                <executions>
+                    <execution>
+                        <id>jooq-codegen</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <!--Insert your DB configuration-->
+                            <jdbc>
+                                <driver>com.mysql.cj.jdbc.Driver</driver>
+                                <url>jdbc:mysql://localhost:3306/student_tracker</url>
+                                <user>springstudent</user>
+                                <password>springstudent</password>
+                            </jdbc>
+                            <generator>
+                                <database>
+                                    <name>org.jooq.meta.mysql.MySQLDatabase</name>
+                                    <includes>.*</includes>
+                                    <excludes></excludes>
+                                    <inputSchema>student_tracker</inputSchema>
+                                </database>
+                                <generate>
+                                    <pojos>true</pojos>
+                                    <pojosEqualsAndHashCode>
+                                        true
+                                    </pojosEqualsAndHashCode>
+                                    <javaTimeTypes>true</javaTimeTypes>
+                                    <fluentSetters>true</fluentSetters>
+                                </generate>
+                                <target>
+                                    <packageName>
+                                        com.jooq.springbootjooq.generated
+                                    </packageName>
+                                    <directory>
+                                        target/generated-sources/jooq
+                                    </directory>
+                                </target>
+                            </generator>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
