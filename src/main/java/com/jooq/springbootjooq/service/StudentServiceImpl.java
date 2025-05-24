@@ -38,4 +38,15 @@ public class StudentServiceImpl implements StudentService {
     public void deleteStudent(Integer id) {
         dsl.deleteFrom(STUDENT).where(STUDENT.ID.eq(id)).execute();
     }
+
+    @Override
+    public void updateStudent(int studentId, Student student) {
+        dsl.update(STUDENT)
+                .set(STUDENT.ID, student.getId())
+                .set(STUDENT.EMAIL, student.getEmail())
+                .set(STUDENT.FIRST_NAME, student.getFirstName())
+                .set(STUDENT.LAST_NAME, student.getLastName())
+                .where(STUDENT.ID.eq(studentId))
+                .execute();
+    }
 }

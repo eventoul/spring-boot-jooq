@@ -49,4 +49,14 @@ public class StudentController {
 
         return "Deleted student id: " + studentId;
     }
+
+    @PutMapping("/update/{studentId}")
+    public String update(@PathVariable int studentId, @RequestBody Student student) {
+
+        log.warn("student: {}", student);
+
+        studentService.updateStudent(studentId, student);
+
+        return "Updated " + student;
+    }
 }
