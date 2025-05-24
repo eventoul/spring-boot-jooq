@@ -9,4 +9,6 @@ public interface StudentService {
     List<Student> selectAll();
 
     List<Student> selectById(Integer id);
+
+    void saveStudent(Student student);
 }
