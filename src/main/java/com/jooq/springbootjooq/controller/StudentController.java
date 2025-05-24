@@ -2,14 +2,13 @@ package com.jooq.springbootjooq.controller;
 
 import com.jooq.springbootjooq.generated.tables.pojos.Student;
 import com.jooq.springbootjooq.service.StudentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Slf4j
 @RequestMapping("/students")
 public class StudentController {
 
@@ -30,4 +29,15 @@ public class StudentController {
 
         return studentService.selectById(studentId);
     }
+
+    @PostMapping("/save")
+    public String save(@RequestBody Student student) {
+
+        log.info("student: {}", student);
+
+        studentService.saveStudent(student);
+
+        return student.toString();
+    }
+
 }
