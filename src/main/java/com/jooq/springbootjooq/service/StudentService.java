@@ -11,4 +11,6 @@ public interface StudentService {
     List<Student> selectById(Integer id);
 
     void saveStudent(Student student);
+
+    void deleteStudent(Integer id);
 }
