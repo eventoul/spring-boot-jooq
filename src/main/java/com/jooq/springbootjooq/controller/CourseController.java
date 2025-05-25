@@ -2,14 +2,14 @@ package com.jooq.springbootjooq.controller;
 
 import com.jooq.springbootjooq.generated.tables.pojos.Course;
 import com.jooq.springbootjooq.service.CourseService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
+@Slf4j
 @RequestMapping("/courses")
 public class CourseController {
 
@@ -29,5 +29,15 @@ public class CourseController {
     public List<Course> getCourseById(@PathVariable int courseId) {
 
         return courseService.selectById(courseId);
+    }
+
+    @PostMapping("/save")
+    public String saveCourse(@RequestBody Course course) {
+
+        log.info("course: {}", course);
+
+        courseService.saveCourse(course);
+
+        return course.toString();
     }
 }
