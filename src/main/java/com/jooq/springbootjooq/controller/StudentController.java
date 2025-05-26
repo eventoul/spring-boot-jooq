@@ -19,19 +19,19 @@ public class StudentController {
     }
 
     @GetMapping("/list")
-    public List<Student> list() {
+    public List<Student> getStudents() {
 
         return studentService.selectAll();
     }
 
     @GetMapping("/detail/{studentId}")
-    public List<Student> detail(@PathVariable int studentId) {
+    public List<Student> getStudentById(@PathVariable int studentId) {
 
         return studentService.selectById(studentId);
     }
 
     @PostMapping("/save")
-    public String save(@RequestBody Student student) {
+    public String saveStudent(@RequestBody Student student) {
 
         log.info("student: {}", student);
 
@@ -41,7 +41,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/delete/{studentId}")
-    public String delete(@PathVariable int studentId) {
+    public String deleteStudent(@PathVariable int studentId) {
 
         log.warn("studentId: {}", studentId);
 
@@ -51,7 +51,7 @@ public class StudentController {
     }
 
     @PutMapping("/update/{studentId}")
-    public String update(@PathVariable int studentId, @RequestBody Student student) {
+    public String updateStudent(@PathVariable int studentId, @RequestBody Student student) {
 
         log.warn("student: {}", student);
 
