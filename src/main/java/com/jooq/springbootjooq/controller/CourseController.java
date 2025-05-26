@@ -40,4 +40,14 @@ public class CourseController {
 
         return course.toString();
     }
+
+    @DeleteMapping("delete/{courseId}")
+    public String deleteCourse(@PathVariable Integer courseId) {
+
+        log.warn("courseId: {}", courseId);
+
+        courseService.deleteCourse(courseId);
+
+        return "Deleted course id: " + courseId;
+    }
 }
