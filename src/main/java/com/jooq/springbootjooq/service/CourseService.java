@@ -11,4 +11,6 @@ public interface CourseService {
     List<Course> selectById(Integer id);
 
     void saveCourse(Course course);
+
+    void deleteCourse(Integer id);
 }
