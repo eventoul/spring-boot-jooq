@@ -40,4 +40,16 @@ public class CourseServiceImpl implements CourseService {
     public void deleteCourse(Integer id) {
         dsl.deleteFrom(COURSE).where(COURSE.ID.eq(id)).execute();
     }
+
+    @Override
+    public void updateCourse(Integer courseId, Course course) {
+        dsl.update(COURSE)
+                .set(COURSE.ID, course.getId())
+                .set(COURSE.TITLE, course.getTitle())
+                .set(COURSE.MANDATORY, course.getMandatory())
+                .set(COURSE.CREDITS, course.getCredits())
+                .set(COURSE.DURATION, course.getDuration())
+                .where(COURSE.ID.eq(courseId))
+                .execute();
+    }
 }
