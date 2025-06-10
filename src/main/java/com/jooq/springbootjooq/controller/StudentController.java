@@ -3,6 +3,7 @@ package com.jooq.springbootjooq.controller;
 import com.jooq.springbootjooq.generated.tables.pojos.Student;
 import com.jooq.springbootjooq.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
