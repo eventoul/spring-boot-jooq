@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @RestController
@@ -43,19 +44,27 @@ public class CourseController {
     }
 
     @DeleteMapping("delete/{courseId}")
-    public String deleteCourse(@PathVariable Integer courseId) {
+    public ResponseEntity<?> deleteCourse(@PathVariable Integer courseId) {
 
         log.warn("courseId: {}", courseId);
 
+        if (courseService.selectById(courseId).isEmpty()) {
+            return ResponseEntity.badRequest().body("Invalid request: Course ID does not exist");
+        }
+
         courseService.deleteCourse(courseId);
 
-        return "Deleted course id: " + courseId;
+        return  ResponseEntity.ok("Deleted course id: " + courseId);
     }
 
     @PutMapping("/update/{courseId}")
     public ResponseEntity<?> updateCourse(@PathVariable Integer courseId, @RequestBody Course course) {
 
         log.warn("course: {}", course);
+
+        if (!Objects.equals(courseId, course.getId()) || courseService.selectById(courseId).isEmpty()) {
+            return ResponseEntity.badRequest().body("Invalid request: Course ID in path does not match ID in request body or course does not exist");
+        }
 
         courseService.updateCourse(courseId, course);
 

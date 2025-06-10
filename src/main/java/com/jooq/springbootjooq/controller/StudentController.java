@@ -3,6 +3,7 @@ package com.jooq.springbootjooq.controller;
 import com.jooq.springbootjooq.generated.tables.pojos.Student;
 import com.jooq.springbootjooq.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,22 +42,22 @@ public class StudentController {
     }
 
     @DeleteMapping("/delete/{studentId}")
-    public String deleteStudent(@PathVariable int studentId) {
+    public ResponseEntity<?> deleteStudent(@PathVariable int studentId) {
 
         log.warn("studentId: {}", studentId);
 
         studentService.deleteStudent(studentId);
 
-        return "Deleted student id: " + studentId;
+        return ResponseEntity.ok(studentId);
     }
 
     @PutMapping("/update/{studentId}")
-    public String updateStudent(@PathVariable int studentId, @RequestBody Student student) {
+    public ResponseEntity<?> updateStudent(@PathVariable int studentId, @RequestBody Student student) {
 
         log.warn("student: {}", student);
 
         studentService.updateStudent(studentId, student);
 
-        return "Updated " + student;
+        return ResponseEntity.ok(student);
     }
 }
